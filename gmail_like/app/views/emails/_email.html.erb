@@ -4,5 +4,9 @@
 <div class="mt-3">
   <!-- Boutons inactifs pour le moment -->
   <%= button_to "Supprimer", email_path(email), method: :delete, class: "btn btn-danger" %>
-  <button class="btn btn-secondary disabled">Marquer comme non-lu</button>
+  <% if email.read %>
+    <%= button_to "Marquer comme non-lu", email_path(email, email: { read: false }), method: :patch, class: "btn btn-secondary" %>
+  <% else %>
+    <%= button_to "Marquer comme lu", email_path(email, email: { read: true }), method: :patch, class: "btn btn-success" %>
+  <% end %>
 </div>

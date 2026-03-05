@@ -1,0 +1,12 @@
+<!-- 1. Mise à jour de la colonne de gauche : on remplace la ligne pour actualiser la classe CSS (fw-bold) et la checkbox -->
+<%= turbo_stream.replace @email do %>
+  <div id="<%= dom_id(@email) %>" class="list-group-item <%= 'fw-bold' unless @email.read %>">
+    <%= check_box_tag :read, true, @email.read, data: { turbo_action: "update-email-read-status", turbo_email_id: @email.id } %>
+    <%= link_to @email.object, email_path(@email), data: { turbo_frame: "email_content" } %>
+  </div>
+<% end %>
+
+<!-- 2. Mise à jour de la colonne de droite : on rafraîchit la vue de l'email pour que le bouton change de texte -->
+<%= turbo_stream.update "email_content" do %>
+  <%= render "email", email: @email %>
+<% end %>

@@ -13,7 +13,8 @@ puts "Création de 5 emails de test...".colorize(:light_blue)
 5.times do
   Email.create!(
     object: Faker::Lorem.sentence(word_count: 4),
-    body: Faker::Lorem.paragraph(sentence_count: 5)
+    body: Faker::Lorem.paragraph(sentence_count: 5),
+    read: false
   )
 end
 

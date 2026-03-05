@@ -8,6 +8,7 @@ class EmailsController < ApplicationController
 
   # GET /emails/1 or /emails/1.json
   def show
+    @email.update(read: true) #when mail is open = read
   end
 
   # GET /emails/new
@@ -30,14 +31,11 @@ class EmailsController < ApplicationController
 
   # PATCH/PUT /emails/1 or /emails/1.json
   def update
+    @email.update(read: params[:email][:read])
     respond_to do |format|
-      if @email.update(email_params)
-        format.html { redirect_to @email, notice: "Email was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @email }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to emails_path, status: :see_other }
+      format.turbo_stream
+      #format.json { render :show, status: :ok, location: @email }
     end
   end
 
@@ -46,7 +44,7 @@ class EmailsController < ApplicationController
     @email.destroy!
 
     respond_to do |format|
-      format.html { redirect_to emails_path, notice: "Email was successfully destroyed.", status: :see_other }
+      format.html { redirect_to emails_path, status: :see_other }
       format.turbo_stream
     end
   end

@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_05_102254) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_05_142417) do
   create_table "emails", force: :cascade do |t|
     t.string "object"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "read", default: false
   end
 end
