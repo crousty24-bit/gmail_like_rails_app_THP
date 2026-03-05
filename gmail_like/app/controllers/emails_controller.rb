@@ -19,19 +19,13 @@ class EmailsController < ApplicationController
   def edit
   end
 
-  # POST /emails or /emails.json
+  # create new email when click on btn & redirect to index
   def create
-    @email = Email.new(email_params)
-
-    respond_to do |format|
-      if @email.save
-        format.html { redirect_to @email, notice: "Email was successfully created." }
-        format.json { render :show, status: :created, location: @email }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
-      end
-    end
+    @email = Email.create!(
+      object: Faker::Lorem.sentence(word_count: 4),
+      body: Faker::Lorem.paragraph(sentence_count: 5)
+    )
+    redirect_to emails_path
   end
 
   # PATCH/PUT /emails/1 or /emails/1.json
@@ -61,10 +55,5 @@ class EmailsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_email
       @email = Email.find(params.expect(:id))
-    end
-
-    # Only allow a list of trusted parameters through.
-    def email_params
-      params.expect(email: [ :object, :body ])
     end
 end

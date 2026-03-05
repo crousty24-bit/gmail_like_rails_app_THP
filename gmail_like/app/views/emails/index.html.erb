@@ -1,4 +1,5 @@
 <div class="container mt-5">
+  <%= button_to "Recevoir un email", emails_path, method: :post, class: "btn btn-primary mb-3", data: { turbo_frame: "emails_list" } %>
   <div class="row">
     
     <!-- Colonne de gauche : Liste des emails -->
