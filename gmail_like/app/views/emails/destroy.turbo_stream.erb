@@ -1,0 +1,7 @@
+<!-- 1. Turbo Stream localise la div avec le dom_id de l'email à gauche et la supprime -->
+<%= turbo_stream.remove @email %>
+
+<!-- 2. Turbo Stream cible la turbo_frame "email_content" à droite et remplace son contenu -->
+<%= turbo_stream.update "email_content" do %>
+  <p class="text-muted">Cliquez sur un email pour lire son contenu.</p>
+<% end %>

@@ -7,9 +7,8 @@
       <h2 class="mb-4">Liste des emails</h2>
       <div class="list-group">
         <% @emails.each do |email| %>
-          <div class="list-group-item">
-            <!-- On affiche uniquement l'objet de l'email pour le moment -->
-            <strong><%= email.object %></strong>
+          <div id="<%= dom_id(email) %>" class="list-group-item">
+            <%= link_to email.object, email_path(email), data: { turbo_frame: "email_content" } %>
           </div>
         <% end %>
       </div>
@@ -20,8 +19,9 @@
       <h2 class="mb-4">Email sélectionné</h2>
       <div class="card">
         <div class="card-body" id="email-content">
-          <!-- Cette colonne est vide au chargement de la page -->
-          <p class="text-muted">Cliquez sur un email pour lire son contenu.</p>
+          <%= turbo_frame_tag "email_content" do %>
+            <p class="text-muted">Cliquez sur un email pour lire son contenu.</p>
+          <% end %>
         </div>
       </div>
     </div>
