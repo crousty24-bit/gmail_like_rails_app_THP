@@ -1,9 +1,10 @@
 <%= turbo_frame_tag "email_content" do %>
-  <%= render "email", email: @email %> #email content show in right column
-  <%= turbo_stream.replace @email do %> #update mail status to read in left column using .replace
+  <%= render "email", email: @email %>
+  <%= turbo_stream.replace @email do %>
     <div id="<%= dom_id(@email) %>" class="list-group-item <%= 'fw-bold' unless @email.read %>">
       <%= check_box_tag :read, true, @email.read, data: { turbo_action: "update-email-read-status", turbo_email_id: @email.id } %>
       <%= link_to @email.object, email_path(@email), data: { turbo_frame: "email_content" } %>
     </div>
   <% end %>
 <% end %>
+#update mail status to read in left column using .replace
