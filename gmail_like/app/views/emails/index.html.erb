@@ -1,16 +1,29 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <div class="row">
+    
+    <!-- Colonne de gauche : Liste des emails -->
+    <div class="col-md-5">
+      <h2 class="mb-4">Liste des emails</h2>
+      <div class="list-group">
+        <% @emails.each do |email| %>
+          <div class="list-group-item">
+            <!-- On affiche uniquement l'objet de l'email pour le moment -->
+            <strong><%= email.object %></strong>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-<% content_for :title, "Emails" %>
+    <!-- Colonne de droite : Email sélectionné -->
+    <div class="col-md-7">
+      <h2 class="mb-4">Email sélectionné</h2>
+      <div class="card">
+        <div class="card-body" id="email-content">
+          <!-- Cette colonne est vide au chargement de la page -->
+          <p class="text-muted">Cliquez sur un email pour lire son contenu.</p>
+        </div>
+      </div>
+    </div>
 
-<h1>Emails</h1>
-
-<div id="emails">
-  <% @emails.each do |email| %>
-    <%= render email %>
-    <p>
-      <%= link_to "Show this email", email %>
-    </p>
-  <% end %>
+  </div>
 </div>
-
-<%= link_to "New email", new_email_path %>
